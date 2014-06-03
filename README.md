@@ -29,7 +29,7 @@ pip install -r requirements.txt -t lib
 gsutil mb gs://myawesomebucket-pub/
 ```
 
-2. Now let's the base acl for the bucket:
+2. Now let's set the base acl for the bucket:
 ```
 gsutil acl set public-read gs://myawesomebucket-pub/
 ```
@@ -44,7 +44,7 @@ gsutil cp rock-bench-knights-ferry.jpg gs://myawesomebucket-pub/
 gsutil acl set public-read gs://myawesomebucket-pub/rock-bench-knights-ferry.jpg
 ```
 
-5. Awesome! Our file is available via https://storage.googleapis.com/{bucket-name}/{file-name} but that's not what we want.
+5. Awesome! Our file is available via ```https://storage.googleapis.com/{bucket-name}/{file-name}``` but that's not what we want.
 
 6. Now let's getting a serving url:
 
