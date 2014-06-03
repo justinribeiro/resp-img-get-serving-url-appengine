@@ -1,0 +1,3 @@
+Flask==0.10.1
+google-api-python-client==1.2
+GoogleAppEngineCloudStorageClient==1.9.0.0
