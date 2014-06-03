@@ -21,7 +21,7 @@ pip install -r requirements.txt -t lib
 3. Change the application project id in app.yaml.
 4. Deploy to App Engine (either via appcfg or via Git hook)
 
-### How it works
+### Getting started
 
 1. Let's presume that we don't use our default bucket for our recently created project, but rather need to create a new one:
 
@@ -39,7 +39,7 @@ gsutil acl set public-read gs://myawesomebucket-pub/
 gsutil cp rock-bench-knights-ferry.jpg gs://myawesomebucket-pub/
 ```
 
-4. Oh no, our acl on our upload didn't listen, let's set the acl on the file.
+4. Now, if we just want to serve our file from GCS, we can set the acl on our uploaded file (though for the serving url, we don't have to):
 ```
 gsutil acl set public-read gs://myawesomebucket-pub/rock-bench-knights-ferry.jpg
 ```
@@ -70,26 +70,6 @@ https://lh5.ggpht.com/rCGu26RVMiLkEepYZhhfmxMxsKrb29wUFGfqirbErbNvmLqVlr7mFvXILG
 ```
 You can see this in action via the following JSFiddle: [http://jsfiddle.net/justinribeiro/kTVHd/](http://jsfiddle.net/justinribeiro/kTVHd/). The fiddle uses the very awesome [Picturefill image polyfill](https://github.com/scottjehl/picturefill).
 
-### I need CORS Justin!?!?!?!?!
-
-Google Cloud Storage does have support for cross-origin resource sharing [CORS](https://developers.google.com/storage/docs/cross-origin):
-```
-gsutil cors set my-cors.json gs://myawesomebucket-pub
-```
-
-where the json-file looks like:
-```
-[
-  {
-    "origin": ["https://my.domain.somewhere"],
-    "responseHeader": ["Content-Type"],
-    "method": ["GET"],
-    "maxAgeSeconds": 3600
-  }
-]
-```
-
-
 ### Gotcha's and things
 
 1. Only one app can "own" the image. As stated in the [documentation](https://developers.google.com/appengine/docs/python/images/functions) for get_serving_url:
@@ -98,4 +78,6 @@ where the json-file looks like:
 
 2. Can't scale up above 1600 pixels. As a matter of fact, the Image service won't scale an image beyond the uploads intial size (don't expect the service to scale 32px image to 1600px).
 
-3. Probably other things that I'm forgetting at the moment.
+3. The serving url is inherently public (no support for private serving urls).
+
+4. Probably other things that I'm forgetting at the moment.
